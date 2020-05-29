@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 
-import Story from '../../components/Story';
+import Story from "../../components/Story";
 
-import './Stories.scss';
+import "./Stories.scss";
 
 const Stories = ({ stories, getUserHandler }) => {
   return (
     <React.Fragment>
       <section className="stories">
-        <div className="container">
-        </div>
+        <div className="container"></div>
       </section>
 
-      {showStory && (
-        <Story />
-        )}
+      {/* {showStory && ( */}
+      <Story />
+      {/* )} */}
     </React.Fragment>
   );
 };
