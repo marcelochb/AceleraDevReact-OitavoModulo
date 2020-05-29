@@ -11,26 +11,38 @@ export const useFeed = () => {
 
   useEffect(() => {
     const loadUsers = async () => {
-      const response = await fetch(
-        "https://5e7d0266a917d70016684219.mockapi.io/api/v1/users"
-      );
-      const data = await response.json();
-      setUsers(data);
+      try {
+        const response = await fetch(
+          "https://5e7d0266a917d70016684219.mockapi.io/api/v1/users"
+        );
+        const data = await response.json();
+        setUsers(data);
+
+      } catch (error) {
+
+      }
     };
     loadUsers();
   }, []);
 
   useEffect(() => {
     const loadPosts = async () => {
-      const response = await fetch(
-        `https://5e7d0266a917d70016684219.mockapi.io/api/v1/users/${users[usersFetched].id}/posts`
-      );
-      const data = await response.json();
-      setPosts([...posts, ...data]);
-      setUsersFetched(usersFetched + 1);
+      try {
+
+        const response = await fetch(
+          `https://5e7d0266a917d70016684219.mockapi.io/api/v1/users/${users[usersFetched].id}/posts`
+        );
+        const data = await response.json();
+        setPosts(prev => ([
+          ...prev,
+          ...data,
+        ]));
+        setUsersFetched(usersFetched + 1);
+      } catch (error) {
+
+      }
     };
     if (usersFetched !== users.length) loadPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users, usersFetched]);
 
   useEffect(() => {
@@ -50,7 +62,10 @@ export const useFeed = () => {
       posts,
       stories,
       usersFetched,
-      getUserPostById,
     },
+    setFeed: {
+      getUserPostById,
+
+    }
   };
 };

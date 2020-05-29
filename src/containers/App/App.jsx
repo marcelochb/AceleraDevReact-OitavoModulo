@@ -10,7 +10,7 @@ import "./App.scss";
 const App = () => (
   <div data-testid="app">
     <BrowserRouter>
-      {/* <Topbar /> */}
+      <Topbar />
 
       <Routes />
     </BrowserRouter>
