@@ -7,10 +7,17 @@ import Loading from "../../components/Loading";
 import { useFetchUsers, useFetchPosts } from "../../utils/hooks";
 
 const ProfileRoute = () => {
-  const { handleFetchUsers, getFetchUsers } = useFetchUsers({
+  const {
+    handleFetchUsers: { getUserByName },
+    getFetchUsers: { user },
+  } = useFetchUsers({
     isEnableToFetchAllUsers: false,
   });
-  const { handleFetchPosts, getFetchPosts } = useFetchPosts({
+
+  const {
+    handleFetchPosts: { getPostByUserId },
+    getFetchPosts,
+  } = useFetchPosts({
     isEnableToFetchAllPosts: false,
   });
 
@@ -18,25 +25,25 @@ const ProfileRoute = () => {
     const loadUser = async () => {
       const { pathname } = window.location;
       const param = pathname.split("/")[2];
-      await handleFetchUsers.getUserByName(param);
+      await getUserByName(param);
     };
     loadUser();
-  }, [handleFetchUsers]);
+  }, [getUserByName]);
 
   useEffect(() => {
     const loadUserPosts = async () => {
-      await handleFetchPosts.getPostByUserId(getFetchUsers.user.id);
+      await getPostByUserId(user.id);
     };
-    if (getFetchUsers.user.id) loadUserPosts();
-  }, [getFetchUsers.user.id, handleFetchPosts]);
+    if (user.id) loadUserPosts();
+  }, [user.id, getPostByUserId]);
 
   return (
     <div data-testid="profile-route">
       <UserProfile
-        name={getFetchUsers.user.name}
-        avatar={getFetchUsers.user.avatar}
-        username={getFetchUsers.user.username}
-        email={getFetchUsers.user.email}
+        name={user.name}
+        avatar={user.avatar}
+        username={user.username}
+        email={user.email}
       />
 
       {getFetchPosts.isLoading ? (
