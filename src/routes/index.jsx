@@ -12,11 +12,17 @@ const Routes = () => (
       <FeedRoute />
     </Route>
 
-    <Route exact path="/users"></Route>
+    <Route exact path="/users">
+      <UsersRoute />
+    </Route>
 
-    <Route path="/users/:username"></Route>
+    <Route path="/users/:username">
+      <ProfileRoute />
+    </Route>
 
-    <Route path="/newuser"></Route>
+    <Route path="/newuser">
+      <NewUserRoute />
+    </Route>
   </Switch>
 );
 

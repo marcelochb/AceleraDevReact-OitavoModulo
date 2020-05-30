@@ -1,10 +1,23 @@
 import { useState, useEffect } from 'react';
 
 
-export const useFetchUsers = () => {
+export const useFetchUsers = ({ isEnableToFetchAllUsers = false }) => {
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
 
-  const getUserPostById = (postUserId) => users.find((user) => postUserId === user.id);
+  const getUserById = (userId) => users.find((user) => userId === user.id);
+
+
+  const getUserByName = async (userName) => {
+    try {
+      const response = await fetch(`https://5e7d0266a917d70016684219.mockapi.io/api/v1/users?search=${userName}`)
+      const data = await response.json();
+      setUser(data);
+
+    } catch (error) {
+
+    }
+  };
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -19,15 +32,17 @@ export const useFetchUsers = () => {
 
       }
     };
-    loadUsers();
-  }, []);
+    if (isEnableToFetchAllUsers) loadUsers();
+  }, [isEnableToFetchAllUsers]);
 
   return {
     getFetchUsers: {
       users,
+      user,
     },
     handleFetchUsers: {
-      getUserPostById,
+      getUserById,
+      getUserByName,
     }
 
   };

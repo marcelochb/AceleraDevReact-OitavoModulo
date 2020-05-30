@@ -5,3 +5,4 @@ export { usePost } from './usePost';
 export { useFetchPosts } from './useFetchPosts';
 export { useFetchStories } from './useFetchStories';
 export { useFetchUsers } from './useFetchUsers';
+export { useUserForm } from './useUserForm';

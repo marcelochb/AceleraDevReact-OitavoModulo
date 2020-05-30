@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import UsersList from '../../containers/UsersList/UsersList';
+import UsersList from "../../containers/UsersList/UsersList";
+import { useFetchUsers } from "../../utils/hooks";
 
 const UsersRoute = () => {
+  const { getFetchUsers } = useFetchUsers({ isEnableToFetchAllUsers: true });
   return (
-    <div className="container">
+    <div className="container" data-testid="users-route">
+      <UsersList users={getFetchUsers.users} />
     </div>
   );
 };

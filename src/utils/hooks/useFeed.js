@@ -3,8 +3,8 @@ import { useFetchPosts } from "./useFetchPosts";
 import { useFetchStories } from "./useFetchStories";
 
 export const useFeed = () => {
-  const { getFetchUsers, handleFetchUsers } = useFetchUsers();
-  const { getFetchPosts } = useFetchPosts({ users: getFetchUsers.users })
+  const { getFetchUsers, handleFetchUsers } = useFetchUsers({ isEnableToFetchAllUsers: true });
+  const { getFetchPosts } = useFetchPosts({ isEnableToFetchAllPosts: true, users: getFetchUsers.users })
   const { getFetchStories } = useFetchStories();
 
   return {
@@ -15,7 +15,7 @@ export const useFeed = () => {
       usersFetched: getFetchPosts.usersFetched,
     },
     setFeed: {
-      getUserPostById: handleFetchUsers.getUserPostById,
+      getUserPostById: handleFetchUsers.getUserById,
 
     }
   };
