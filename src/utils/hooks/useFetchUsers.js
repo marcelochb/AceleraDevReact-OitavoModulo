@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 
 export const useFetchUsers = ({ isEnableToFetchAllUsers = false }) => {
@@ -8,16 +8,16 @@ export const useFetchUsers = ({ isEnableToFetchAllUsers = false }) => {
   const getUserById = (userId) => users.find((user) => userId === user.id);
 
 
-  const getUserByName = async (userName) => {
+  const getUserByName = useCallback(async (userName) => {
     try {
       const response = await fetch(`https://5e7d0266a917d70016684219.mockapi.io/api/v1/users?search=${userName}`)
       const data = await response.json();
-      setUser(data);
+      setUser(data[0]);
 
     } catch (error) {
 
     }
-  };
+  }, [])
 
   useEffect(() => {
     const loadUsers = async () => {

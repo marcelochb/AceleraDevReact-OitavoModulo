@@ -9,7 +9,7 @@ const UserProfile = ({ avatar, name, username }) => {
         <div className="profile-data">
           <div className="user">
             <div className="user__thumb">
-              {avatar.length > 0 ? (
+              {avatar?.length > 0 ? (
                 <img src={avatar} alt="" />
               ) : (
                 <img

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 
 export const useFetchPosts = ({ isEnableToFetchAllPosts = false, users = [] }) => {
@@ -8,7 +8,7 @@ export const useFetchPosts = ({ isEnableToFetchAllPosts = false, users = [] }) =
   const [usersFetched, setUsersFetched] = useState(0);
 
 
-  const getPostByUserId = async (userId) => {
+  const getPostByUserId = useCallback(async (userId) => {
     try {
       setIsLoading(true);
       const response = await fetch(`https://5e7d0266a917d70016684219.mockapi.io/api/v1/users/${userId}/posts`)
@@ -18,7 +18,7 @@ export const useFetchPosts = ({ isEnableToFetchAllPosts = false, users = [] }) =
     } catch (error) {
 
     }
-  }
+  }, [])
 
   useEffect(() => {
     const loadPosts = async () => {

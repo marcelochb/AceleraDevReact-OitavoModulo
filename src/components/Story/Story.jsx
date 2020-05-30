@@ -8,10 +8,8 @@ import { useStory } from "../../utils/hooks";
 const Story = ({ story, user, handleClose }) => {
   const { setStory } = useStory();
 
-  const VideoOfStory = () => {
-    if (!story.videoUrl) return null;
-
-    return (
+  const VideoOfStory = () =>
+    story.videoUrl && (
       <div className="container">
         <section className="story__video__wrapper">
           <video
@@ -32,7 +30,6 @@ const Story = ({ story, user, handleClose }) => {
         </section>
       </div>
     );
-  };
 
   return (
     <section className="story" data-testid="story">
@@ -61,7 +58,7 @@ const Story = ({ story, user, handleClose }) => {
         </div>
       </div>
 
-      <VideoOfStory />
+      {VideoOfStory()}
     </section>
   );
 };
